@@ -37,20 +37,26 @@ class userFactory
 
 
 
-if(isset($_POST['submit']) && $_POST['submit'] == 'Register')
+if(isset($_POST['submit']))
 {
-    $type = $_POST['usertype'];
-    $factory = new userFactory($type);
-    $userObj = $factory->getInstance($type);
-    $userObj->register($_POST);
+    if($_POST['submit'] == 'Register')
+    {
+        $type = $_POST['usertype'];
+        $factory = new userFactory($type);
+        $userObj = $factory->getInstance($type);
+        $userObj->register($_POST);
+    }
 }
 
-if(isset($_POST['submit']) && $_POST['submit'] == 'Login')
+if(isset($_POST['submit']))
 {
-    $type = $_POST['usertype'];
-    $factory = new userFactory($type);
-    $userObj = $factory->getInstance($type);
-    $userObj->login($_POST);
+    if($_POST['submit'] == 'Login')
+    {
+        $type = $_POST['usertype'];
+        $factory = new userFactory($type);
+        $adminObj = $factory->getInstance($type);
+        $adminObj->login($_POST);
+    }
 }
 
 
