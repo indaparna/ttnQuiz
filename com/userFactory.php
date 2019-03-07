@@ -47,7 +47,10 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Register')
 
 if(isset($_POST['submit']) && $_POST['submit'] == 'Login')
 {
-    $adminObj = new userFactory($_POST);
+    $type = $_POST['usertype'];
+    $factory = new userFactory($type);
+    $userObj = $factory->getInstance($type);
+    $userObj->login($_POST);
 }
 
 

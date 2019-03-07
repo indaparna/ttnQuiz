@@ -16,7 +16,7 @@ class superUser extends connectDb
             {
                 echo "record inserted successfully !<br>";
                 echo "you are ready for Login<br>";
-                echo "<a href='../../com/login/login.php'>Login Page</a>";
+                echo "<a href='/com/login.php'>Login Page</a>";
                 // header("location: ../../com/login/login.php");
             }
             else
@@ -30,6 +30,29 @@ class superUser extends connectDb
             echo "DUPLICATE ENTRY FOUND PLEASE TRY ANOTHER USERNAME";
         }
     }
+
+    public function login($userObj)
+    {
+        $instance=parent::getInstance();
+        $conn=$instance->getConnection();
+        $sth1 = $conn->prepare("SELECT * from user where `user_name` = '{$userObj['username']}' AND `user_pass` = '{$userObj['pass']}' AND `user_type` = '{$userObj['usertype']}'");
+        $result1 = $sth1->execute();
+        if($sth1->fetch())
+        {
+            // $session->__set("USER_LOGIN",TRUE);
+            // print_r( $_SESSION);
+            echo "User Validated Successfully <br>";
+            echo "You Can Start The Quiz Now";
+            echo "<a href='/user/startQuiz.php'>TAKE TEST</a>";
+            // header('location: ../../user/userDashboard.php');
+            // die();
+        }
+        else{
+            echo "User Not Found!!";
+            echo "<a href='login.php'>Back To Login</a>";            
+        }
+    }
+
 }
 
 ?>
